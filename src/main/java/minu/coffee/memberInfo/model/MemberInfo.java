@@ -3,7 +3,7 @@ package minu.coffee.memberInfo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import minu.coffee.common.CommonField;
-import minu.coffee.filter.EntityColumnEncryptor;
+import minu.coffee.common.filter.EntityColumnEncryptor;
 import minu.coffee.shopInfo.model.ShopInfo;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,6 +24,14 @@ public class MemberInfo extends CommonField {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_info_id")
     private ShopInfo shopInfo;
+
+    @Convert(converter = EntityColumnEncryptor.class)
+    @Column(name = "member_id")
+    private String memberId;
+
+    @Convert(converter = EntityColumnEncryptor.class)
+    @Column(name = "member_password")
+    private String memberPassword;
 
     @Convert(converter = EntityColumnEncryptor.class)
     @Column(name = "first_name")
