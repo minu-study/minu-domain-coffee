@@ -29,6 +29,9 @@ public class PaymentHistory extends CommonField {
     @JoinColumn(name = "member_info_id")
     private MemberInfo memberInfo;
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
     @Column(name = "original_price")
     private Integer originalPrice;
 

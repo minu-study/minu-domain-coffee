@@ -24,7 +24,7 @@ public class ProductQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<ProductDto.ProductSummaryView> getProductSummaryView(Long shopInfoId, LocalDateTime now) {
+    public List<ProductDto.ProductSummaryView> getProductSummaryView(Long shopInfoId, LocalDateTime now, Long subCategoryId) {
         Expression<ProductDto.ProductSummaryView> expression = fields(ProductDto.ProductSummaryView.class,
                 product.id,
                 category.code.as("categoryCode"),
@@ -51,6 +51,7 @@ public class ProductQueryRepository {
                                 .and(productPrice.deleted.eq(false))
                                 .and(productPrice.startDate.loe(now)
                                 .and(productPrice.endDate.goe(now)))
+                                .and(product.subCategory.id.eq(subCategoryId))
                 )
                 .fetch();
     }
